@@ -2,6 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from config import base_url, base_user_url
+import re
 
 
 def get_list(headers):
@@ -9,8 +10,7 @@ def get_list(headers):
 
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
-    buttons = soup.find_all("button")
-    buttons = filter(lambda button: "data-full" in button.attrs, buttons)
+    buttons = soup.find_all("button", attrs={"data-full": re.compile(".")})
 
     decks = list()
     for button in buttons:
