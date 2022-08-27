@@ -1,11 +1,12 @@
-from fastapi import FastAPI, Response, Request
+from fastapi import Response, Request
+from app import create_app
 import auth
 from cookie import get_cookie
 import deck
 from models.login import Login
 from fastapi.responses import RedirectResponse
 
-app = FastAPI()
+app = create_app()
 
 
 @app.get("/", include_in_schema=False)
