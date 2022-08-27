@@ -1,17 +1,16 @@
-from typing import Union
 from fastapi import FastAPI, Response, Request
 import auth
 from cookie import get_cookie
 import deck
 from models.login import Login
-
+from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World Teste"}
+def root():
+    return RedirectResponse("/docs")
 
 
 @app.post("/login")
