@@ -1,12 +1,13 @@
 from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def create_app():
     app = FastAPI()
 
     origins = [
-        "*"
+        "http://localhost:3000",
+        "https://anki-api-free.herokuapp.com"
     ]
 
     app.add_middleware(
