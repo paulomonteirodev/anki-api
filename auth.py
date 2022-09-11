@@ -1,10 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 from config import base_url
-
 from cookie import get_cookie
-from models.login import Login  # Python 2: import cookielib as cookiejar
-import re
+from models.login import Login
 
 
 def get_csrf_token():

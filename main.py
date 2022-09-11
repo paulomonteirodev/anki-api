@@ -17,7 +17,8 @@ def root():
 @app.post("/login")
 def login(login: Login, response: Response):
     cookie = auth.login(login)
-    response.set_cookie(key="ankiweb", value=cookie)
+    response.set_cookie(
+        key="ankiweb", value=cookie["ankiweb"], expires=cookie["expires"])
     return
 
 
