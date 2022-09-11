@@ -35,8 +35,8 @@ def decks(id: str, response: Response, request: Request):
     if cookie_value == None:
         headers = {"Cookie": request.headers.get("cookie")}
         user_cookie = auth.login_user(headers)
-        response.set_cookie(key="ankiweb_user", value=user_cookie)
-        cookie_value = user_cookie
+        cookie_value = user_cookie["ankiweb"]
+        response.set_cookie(key="ankiweb_user", value=cookie_value)
 
     headers = {"Cookie": f"ankiweb={cookie_value}"}
     return deck.get(id, headers)

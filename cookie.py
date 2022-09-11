@@ -5,12 +5,16 @@ from http.cookies import SimpleCookie
 
 def get_cookie(key: str, cookies):
     simple_cookie = SimpleCookie()
-    simple_cookie.load("ankiweb=eyJrIjogIkFudFNVWWxDRHpUMW9jNFEiLCAiYyI6IDEsICJ0IjogMTY2MjQ3NDgxOX0.kJZQXxA-YrNGAMD0BdSmBX46yIzMgVhP3ZJK5Vs2zNk; Max-Age=2592000; Path=/; expires=Thu, 06-Oct-2022 14:33:39 GMT; secure; HttpOnly; SameSite=lax")
+    simple_cookie.load(cookies)
 
-    expires = int(parse(simple_cookie[key].get(
-        "expires")).timestamp() - time())
+    if key not in simple_cookie.keys():
+        return None
 
-    if key in simple_cookie.keys():
-        return {"ankiweb": simple_cookie[key].value, "expires": expires}
+    cookie = simple_cookie[key]
+    expires_cookie = cookie.get("expires")
 
-    return None
+    expires = None
+    if expires_cookie:
+        expires = int(parse(expires_cookie).timestamp() - time())
+
+    return {"ankiweb": cookie.value, "expires": expires}
