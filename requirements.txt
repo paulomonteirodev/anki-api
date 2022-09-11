@@ -3,4 +3,4 @@ pydantic
 requests
 uvicorn
 beautifulsoup4
-dateutil
+python-dateutil
