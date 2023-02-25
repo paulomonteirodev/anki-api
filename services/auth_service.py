@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 from config import base_url
-from cookie import get_cookie
+from helpers.cookie import get_cookie
 from models.login import Login
 
 
