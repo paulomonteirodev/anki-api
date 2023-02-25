@@ -3,7 +3,7 @@ from dateutil.parser import parse
 from http.cookies import SimpleCookie
 
 
-def get_cookie(key: str, cookies):
+def get(key: str, cookies):
     simple_cookie = SimpleCookie()
     simple_cookie.load(cookies)
 
@@ -17,4 +17,10 @@ def get_cookie(key: str, cookies):
     if expires_cookie:
         expires = int(parse(expires_cookie).timestamp() - time())
 
-    return {"ankiweb": cookie.value, "expires": expires}
+    return {key: cookie.value, "expires": expires}
+
+
+def get_value(key: str, cookies):
+    cookie_object = get(key, cookies)
+
+    return None if cookie_object == None else cookie_object[key]

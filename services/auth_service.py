@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 from config import base_url
-from helpers.cookie import get_cookie
+import helpers.cookie as cookie
 from models.login import Login
 
 
@@ -23,7 +23,7 @@ def login(login: Login):
     response = requests.post(url, headers=headers,
                              data=payload, allow_redirects=False)
 
-    return get_cookie("ankiweb", response.headers["set-cookie"])
+    return cookie.get("ankiweb", response.headers["set-cookie"])
 
 
 def login_user(headers):
@@ -37,4 +37,4 @@ def login_user(headers):
         redirect_url, headers=headers, verify=False, allow_redirects=False
     )
 
-    return get_cookie("ankiweb", response.headers["set-cookie"])
+    return cookie.get("ankiweb", response.headers["set-cookie"])
